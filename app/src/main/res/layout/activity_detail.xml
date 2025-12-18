@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txtDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="12dp"/>
+
+    <ImageView
+        android:id="@+id/imgDetail"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="Imagen del monstruo"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/txtMonsterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="6dp"/>
+
+    <TextView
+        android:id="@+id/txtMonsterLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nivel"
+        android:textSize="16sp"
+        android:paddingBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver"/>
+</LinearLayout>
