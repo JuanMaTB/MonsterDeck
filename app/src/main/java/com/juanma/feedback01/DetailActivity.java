@@ -24,16 +24,18 @@ public class DetailActivity extends AppCompatActivity {
     private Button btnEdit;
 
     private final ActivityResultLauncher<Intent> editLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                // Cuando volvemos de Edit, recargamos el monstruo
-                loadMonster();
-            });
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> loadMonster());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Detalle");
         setContentView(R.layout.activity_detail);
+
+        // Flecha de volver en la barra
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         db = new DBHelper(this);
 
@@ -45,7 +47,6 @@ public class DetailActivity extends AppCompatActivity {
 
         monsterId = getIntent().getLongExtra("monsterId", -1);
 
-        // Checkbox solo informativo aquí (la edición se hace en la pantalla Edit)
         chkDefeated.setClickable(false);
         chkDefeated.setFocusable(false);
 
@@ -58,6 +59,12 @@ public class DetailActivity extends AppCompatActivity {
         loadMonster();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // vuelve a la pantalla anterior
+        return true;
+    }
+
     private void loadMonster() {
         if (monsterId == -1) return;
 
@@ -68,7 +75,6 @@ public class DetailActivity extends AppCompatActivity {
         detailLevel.setText("Nivel " + m.level);
         chkDefeated.setChecked(m.defeated);
 
-        // Icono simple por tipo (opcional)
         if ("slime".equals(m.type)) {
             detailImg.setImageResource(android.R.drawable.presence_online);
         } else if ("goblin".equals(m.type)) {

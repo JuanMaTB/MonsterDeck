@@ -28,6 +28,11 @@ public class EditMonsterActivity extends AppCompatActivity {
         setTitle(getString(R.string.add_edit_title));
         setContentView(R.layout.activity_edit);
 
+        // Flecha de volver en la barra
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         db = new DBHelper(this);
 
         edtName = findViewById(R.id.edtName);
@@ -62,6 +67,12 @@ public class EditMonsterActivity extends AppCompatActivity {
         btnSave.setOnClickListener(v -> saveAndExit());
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // vuelve a la pantalla anterior
+        return true;
+    }
+
     private void saveAndExit() {
         String name = edtName.getText().toString().trim();
         String levelStr = edtLevel.getText().toString().trim();
@@ -91,7 +102,6 @@ public class EditMonsterActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.monster_updated), Toast.LENGTH_SHORT).show();
         }
 
-        // <- clave: cerramos esta pantalla y volvemos a Detail/Main
         finish();
     }
 }
