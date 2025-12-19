@@ -2,85 +2,58 @@ package com.juanma.feedback01;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Mini “modelo” (simple y claro)
-    static class Monster {
-        String name;
-        int level;
-        int iconResId;
-
-        Monster(String name, int level, int iconResId) {
-            this.name = name;
-            this.level = level;
-            this.iconResId = iconResId;
-        }
-    }
-
-    private final ArrayList<Monster> monsters = new ArrayList<>();
+    private ArrayList<String> monsters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1) Datos (por ahora hardcodeados)
-        monsters.add(new Monster("Slime", 1, R.mipmap.ic_launcher));
-        monsters.add(new Monster("Goblin", 3, R.mipmap.ic_launcher));
-        monsters.add(new Monster("Dragon", 10, R.mipmap.ic_launcher));
+        ListView list = findViewById(R.id.listMonsters);
 
-        // 2) ListView + Adapter
-        ListView listView = findViewById(R.id.listMonsters);
+        // Datos de prueba
+        monsters = new ArrayList<>();
+        monsters.add("Slime - Nivel 1");
+        monsters.add("Goblin - Nivel 3");
+        monsters.add("Dragon - Nivel 10");
 
-        ArrayAdapter<Monster> adapter = new ArrayAdapter<Monster>(this, 0, monsters) {
-            @NonNull
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                monsters
+        );
+
+        list.setAdapter(adapter);
+
+        // Click -> abre detalle
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_monster, parent, false);
+            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+
+                String line = monsters.get(position); // "Goblin - Nivel 3"
+                String[] parts = line.split(" - Nivel ");
+
+                String name = parts[0].trim();
+                int level = 1;
+                if (parts.length > 1) {
+                    try { level = Integer.parseInt(parts[1].trim()); } catch (Exception ignored) {}
                 }
 
-                Monster m = getItem(position);
-
-                ImageView img = convertView.findViewById(R.id.imgMonster);
-                TextView txtName = convertView.findViewById(R.id.txtMonsterName);
-                TextView txtLevel = convertView.findViewById(R.id.txtMonsterLevel);
-
-                if (m != null) {
-                    img.setImageResource(m.iconResId);
-                    txtName.setText(m.name);
-                    txtLevel.setText("Nivel " + m.level);
-                }
-
-                return convertView;
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("level", level);
+                startActivity(intent);
             }
-        };
-
-        listView.setAdapter(adapter);
-
-        // 3) CLICK -> abrir DetailActivity
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Monster selected = monsters.get(position);
-
-            Intent i = new Intent(MainActivity.this, DetailActivity.class);
-            i.putExtra("name", selected.name);
-            i.putExtra("level", selected.level);
-            i.putExtra("iconResId", selected.iconResId);
-            startActivity(i);
         });
     }
 }
