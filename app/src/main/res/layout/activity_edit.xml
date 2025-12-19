@@ -1,42 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edtName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:inputType="text"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/edtLevel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/level"
-        android:inputType="number"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Añadir / Editar monstruo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="12dp" />
 
-    <Spinner
-        android:id="@+id/spType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="Nombre (ej: Goblin)"
+            android:inputType="textPersonName" />
 
-    <CheckBox
-        android:id="@+id/chkDefeatedEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/defeated"
-        android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/edtLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:layout_marginTop="10dp"
+            android:hint="Nivel (ej: 3)"
+            android:inputType="number" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+        <Spinner
+            android:id="@+id/spType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginTop="10dp" />
+
+        <CheckBox
+            android:id="@+id/chkDefeatedEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Derrotado" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginTop="14dp"
+            android:text="Guardar" />
+
+    </LinearLayout>
+</ScrollView>
