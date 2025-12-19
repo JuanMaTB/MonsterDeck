@@ -3,11 +3,12 @@
 
     <application
         android:allowBackup="true"
-        android:label="Bestiario RPG"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Feedback01">
+        android:label="@string/app_name"
+        android:supportsRtl="true">
 
-        <!-- MAIN (LAUNCHER) -->
+        <activity android:name=".EditMonsterActivity" android:exported="false" />
+        <activity android:name=".DetailActivity" android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -16,11 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- DETALLE -->
-        <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
 
     </application>
 
