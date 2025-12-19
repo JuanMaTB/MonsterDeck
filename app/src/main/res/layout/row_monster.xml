@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgMonster"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_marginEnd="12dp"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="monster icon"
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:paddingStart="12dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/txtMonsterName"
             android:text="Slime"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/txtType"
+            android:id="@+id/txtMonsterLevel"
+            android:text="Nivel 1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nivel 1"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>
