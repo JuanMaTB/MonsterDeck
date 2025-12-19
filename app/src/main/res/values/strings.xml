@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Feedback01</string>
+    <string name="app_name">Bestiario RPG</string>
+
+    <string name="monster_name_placeholder">Nombre del monstruo</string>
+    <string name="monster_level_placeholder">Nivel</string>
+    <string name="monster_defeated">Derrotado</string>
 </resources>

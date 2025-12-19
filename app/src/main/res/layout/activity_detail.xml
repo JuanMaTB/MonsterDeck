@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/detailImg"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="monster image" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/detailName"
-        android:text="Goblin"
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/monster_name_placeholder"
         android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/detailLevel"
-        android:text="Nivel 3"
-        android:layout_marginTop="6dp"
+        android:id="@+id/txtLevel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/monster_level_placeholder"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp" />
 
     <CheckBox
         android:id="@+id/chkDefeated"
-        android:text="Derrotado"
-        android:layout_marginTop="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/monster_defeated"
+        android:layout_marginTop="12dp" />
 
 </LinearLayout>
