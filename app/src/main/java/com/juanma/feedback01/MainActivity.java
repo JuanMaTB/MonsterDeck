@@ -1,59 +1,117 @@
 package com.juanma.feedback01;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> monsters;
+    private DBHelper db;
+    private ListView listMonsters;
+    private MonsterAdapter adapter;
+
+    private boolean onlyDefeated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Bestiario RPG");
         setContentView(R.layout.activity_main);
 
-        ListView list = findViewById(R.id.listMonsters);
+        db = new DBHelper(this);
+        listMonsters = findViewById(R.id.listMonsters);
 
-        // Datos de prueba
-        monsters = new ArrayList<>();
-        monsters.add("Slime - Nivel 1");
-        monsters.add("Goblin - Nivel 3");
-        monsters.add("Dragon - Nivel 10");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                monsters
-        );
-
-        list.setAdapter(adapter);
-
-        // Click -> abre detalle
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-
-                String line = monsters.get(position); // "Goblin - Nivel 3"
-                String[] parts = line.split(" - Nivel ");
-
-                String name = parts[0].trim();
-                int level = 1;
-                if (parts.length > 1) {
-                    try { level = Integer.parseInt(parts[1].trim()); } catch (Exception ignored) {}
-                }
-
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("name", name);
-                intent.putExtra("level", level);
-                startActivity(intent);
-            }
+        // Click: abrir detalle
+        listMonsters.setOnItemClickListener((parent, view, position, id) -> {
+            Monster m = adapter.getItem(position);
+            Intent i = new Intent(MainActivity.this, DetailActivity.class);
+            i.putExtra("monsterId", m.id);
+            startActivity(i);
         });
+
+        // Long click: borrar con confirmación
+        listMonsters.setOnItemLongClickListener((parent, view, position, id) -> {
+            Monster m = adapter.getItem(position);
+            new AlertDialog.Builder(this)
+                    .setTitle("Eliminar")
+                    .setMessage("¿Seguro que quieres eliminar a " + m.name + "?")
+                    .setPositiveButton("Sí, borrar", (dialog, which) -> {
+                        db.deleteMonster(m.id);
+                        reload();
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+            return true;
+        });
+
+        reload();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload();
+    }
+
+    private void reload() {
+        ArrayList<Monster> data = db.getAll(onlyDefeated);
+        adapter = new MonsterAdapter(this, data);
+        listMonsters.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem filter = menu.findItem(R.id.action_filter_defeated);
+        filter.setTitle(onlyDefeated ? "Ver todos" : "Ver derrotados");
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_add) {
+            Intent i = new Intent(this, EditMonsterActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        if (id == R.id.action_filter_defeated) {
+            onlyDefeated = !onlyDefeated;
+            reload();
+            invalidateOptionsMenu();
+            return true;
+        }
+
+        if (id == R.id.action_about) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Acerca de")
+                    .setMessage("Bestiario RPG (Feedback01)\n\n" +
+                            "- ListView + Adapter\n" +
+                            "- SQLite (CRUD)\n" +
+                            "- Activities + Intent\n" +
+                            "- Menú + Diálogos\n\n" +
+                            "Juanma TB")
+                    .setPositiveButton("OK", null)
+                    .show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
