@@ -7,12 +7,27 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
     private DBHelper db;
-    private long monsterId;
+
+    private long monsterId = -1;
+
+    private ImageView detailImg;
+    private TextView detailName;
+    private TextView detailLevel;
+    private CheckBox chkDefeated;
+    private Button btnEdit;
+
+    private final ActivityResultLauncher<Intent> editLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                // Cuando volvemos de Edit, recargamos el monstruo
+                loadMonster();
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,64 +37,46 @@ public class DetailActivity extends AppCompatActivity {
 
         db = new DBHelper(this);
 
+        detailImg = findViewById(R.id.detailImg);
+        detailName = findViewById(R.id.detailName);
+        detailLevel = findViewById(R.id.detailLevel);
+        chkDefeated = findViewById(R.id.chkDefeated);
+        btnEdit = findViewById(R.id.btnEdit);
+
         monsterId = getIntent().getLongExtra("monsterId", -1);
 
-        ImageView detailImg = findViewById(R.id.detailImg);
-        TextView detailName = findViewById(R.id.detailName);
-        TextView detailLevel = findViewById(R.id.detailLevel);
-        CheckBox chkDefeated = findViewById(R.id.chkDefeated);
-        Button btnEdit = findViewById(R.id.btnEdit);
-
-        Monster m = db.getMonster(monsterId);
-        if (m == null) {
-            finish();
-            return;
-        }
-
-        detailImg.setImageResource(iconForType(m.type));
-        detailName.setText(m.name);
-        detailLevel.setText("Nivel " + m.level);
-        chkDefeated.setChecked(m.defeated);
-
-        chkDefeated.setOnCheckedChangeListener((buttonView, isChecked) -> db.setDefeated(monsterId, isChecked));
+        // Checkbox solo informativo aquí (la edición se hace en la pantalla Edit)
+        chkDefeated.setClickable(false);
+        chkDefeated.setFocusable(false);
 
         btnEdit.setOnClickListener(v -> {
             Intent i = new Intent(DetailActivity.this, EditMonsterActivity.class);
             i.putExtra("monsterId", monsterId);
-            startActivity(i);
+            editLauncher.launch(i);
         });
+
+        loadMonster();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void loadMonster() {
+        if (monsterId == -1) return;
+
         Monster m = db.getMonster(monsterId);
-        if (m == null) {
-            finish();
+        if (m == null) return;
+
+        detailName.setText(m.name);
+        detailLevel.setText("Nivel " + m.level);
+        chkDefeated.setChecked(m.defeated);
+
+        // Icono simple por tipo (opcional)
+        if ("slime".equals(m.type)) {
+            detailImg.setImageResource(android.R.drawable.presence_online);
+        } else if ("goblin".equals(m.type)) {
+            detailImg.setImageResource(android.R.drawable.presence_away);
+        } else if ("dragon".equals(m.type)) {
+            detailImg.setImageResource(android.R.drawable.presence_busy);
         } else {
-            ImageView detailImg = findViewById(R.id.detailImg);
-            TextView detailName = findViewById(R.id.detailName);
-            TextView detailLevel = findViewById(R.id.detailLevel);
-            CheckBox chkDefeated = findViewById(R.id.chkDefeated);
-
-            detailImg.setImageResource(iconForType(m.type));
-            detailName.setText(m.name);
-            detailLevel.setText("Nivel " + m.level);
-            chkDefeated.setChecked(m.defeated);
-        }
-    }
-
-    private int iconForType(String type) {
-        if (type == null) return android.R.drawable.ic_menu_help;
-        switch (type) {
-            case "slime":
-                return android.R.drawable.presence_online;
-            case "goblin":
-                return android.R.drawable.ic_menu_myplaces;
-            case "dragon":
-                return android.R.drawable.ic_menu_compass;
-            default:
-                return android.R.drawable.ic_menu_help;
+            detailImg.setImageResource(android.R.drawable.sym_def_app_icon);
         }
     }
 }

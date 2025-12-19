@@ -2,11 +2,11 @@ package com.juanma.feedback01;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,12 @@ public class EditMonsterActivity extends AppCompatActivity {
     private DBHelper db;
     private long monsterId = -1;
 
+    private EditText edtName;
+    private EditText edtLevel;
+    private Spinner spType;
+    private CheckBox chkDefeated;
+    private Button btnSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +30,11 @@ public class EditMonsterActivity extends AppCompatActivity {
 
         db = new DBHelper(this);
 
-        EditText edtName = findViewById(R.id.edtName);
-        EditText edtLevel = findViewById(R.id.edtLevel);
-        Spinner spType = findViewById(R.id.spType);
-        CheckBox chkDefeated = findViewById(R.id.chkDefeatedEdit);
-        Button btnSave = findViewById(R.id.btnSave);
+        edtName = findViewById(R.id.edtName);
+        edtLevel = findViewById(R.id.edtLevel);
+        spType = findViewById(R.id.spType);
+        chkDefeated = findViewById(R.id.chkDefeatedEdit);
+        btnSave = findViewById(R.id.btnSave);
 
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(
                 this, R.array.monster_types, android.R.layout.simple_spinner_item
@@ -53,36 +59,39 @@ public class EditMonsterActivity extends AppCompatActivity {
             }
         }
 
-        btnSave.setOnClickListener(v -> {
-            String name = edtName.getText().toString().trim();
-            String levelStr = edtLevel.getText().toString().trim();
-            String type = spType.getSelectedItem().toString();
-            boolean defeated = chkDefeated.isChecked();
+        btnSave.setOnClickListener(v -> saveAndExit());
+    }
 
-            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(levelStr)) {
-                Toast.makeText(this, getString(R.string.fill_name_level), Toast.LENGTH_SHORT).show();
-                return;
-            }
+    private void saveAndExit() {
+        String name = edtName.getText().toString().trim();
+        String levelStr = edtLevel.getText().toString().trim();
+        String type = spType.getSelectedItem().toString();
+        boolean defeated = chkDefeated.isChecked();
 
-            int level;
-            try {
-                level = Integer.parseInt(levelStr);
-            } catch (Exception e) {
-                Toast.makeText(this, getString(R.string.invalid_level), Toast.LENGTH_SHORT).show();
-                return;
-            }
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(levelStr)) {
+            Toast.makeText(this, getString(R.string.fill_name_level), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            String typeKey = type.toLowerCase(); // slime/goblin/dragon
+        int level;
+        try {
+            level = Integer.parseInt(levelStr);
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.invalid_level), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            if (monsterId == -1) {
-                db.addMonster(name, level, defeated, typeKey);
-                Toast.makeText(this, getString(R.string.monster_added), Toast.LENGTH_SHORT).show();
-            } else {
-                db.updateMonster(monsterId, name, level, defeated, typeKey);
-                Toast.makeText(this, getString(R.string.monster_updated), Toast.LENGTH_SHORT).show();
-            }
+        String typeKey = type.toLowerCase();
 
-            finish();
-        });
+        if (monsterId == -1) {
+            db.addMonster(name, level, defeated, typeKey);
+            Toast.makeText(this, getString(R.string.monster_added), Toast.LENGTH_SHORT).show();
+        } else {
+            db.updateMonster(monsterId, name, level, defeated, typeKey);
+            Toast.makeText(this, getString(R.string.monster_updated), Toast.LENGTH_SHORT).show();
+        }
+
+        // <- clave: cerramos esta pantalla y volvemos a Detail/Main
+        finish();
     }
 }
