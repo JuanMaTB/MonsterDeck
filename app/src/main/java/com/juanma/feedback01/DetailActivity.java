@@ -1,6 +1,8 @@
 package com.juanma.feedback01;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,29 +11,75 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private DBHelper db;
+    private long monsterId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Detalle");
         setContentView(R.layout.activity_detail);
 
-        ImageView img = findViewById(R.id.detailImg);
-        TextView name = findViewById(R.id.detailName);
-        TextView level = findViewById(R.id.detailLevel);
+        db = new DBHelper(this);
+
+        monsterId = getIntent().getLongExtra("monsterId", -1);
+
+        ImageView detailImg = findViewById(R.id.detailImg);
+        TextView detailName = findViewById(R.id.detailName);
+        TextView detailLevel = findViewById(R.id.detailLevel);
         CheckBox chkDefeated = findViewById(R.id.chkDefeated);
+        Button btnEdit = findViewById(R.id.btnEdit);
 
-        // Recibir datos
-        String monsterName = getIntent().getStringExtra("name");
-        int monsterLevel = getIntent().getIntExtra("level", 1);
+        Monster m = db.getMonster(monsterId);
+        if (m == null) {
+            finish();
+            return;
+        }
 
-        if (monsterName == null) monsterName = "Desconocido";
+        detailImg.setImageResource(iconForType(m.type));
+        detailName.setText(m.name);
+        detailLevel.setText("Nivel " + m.level);
+        chkDefeated.setChecked(m.defeated);
 
-        name.setText(monsterName);
-        level.setText("Nivel " + monsterLevel);
+        chkDefeated.setOnCheckedChangeListener((buttonView, isChecked) -> db.setDefeated(monsterId, isChecked));
 
-        // Imagen placeholder (para no depender de drawables custom aún)
-        img.setImageResource(R.mipmap.ic_launcher);
+        btnEdit.setOnClickListener(v -> {
+            Intent i = new Intent(DetailActivity.this, EditMonsterActivity.class);
+            i.putExtra("monsterId", monsterId);
+            startActivity(i);
+        });
+    }
 
-        // Checkbox por defecto
-        chkDefeated.setChecked(false);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Monster m = db.getMonster(monsterId);
+        if (m == null) {
+            finish();
+        } else {
+            ImageView detailImg = findViewById(R.id.detailImg);
+            TextView detailName = findViewById(R.id.detailName);
+            TextView detailLevel = findViewById(R.id.detailLevel);
+            CheckBox chkDefeated = findViewById(R.id.chkDefeated);
+
+            detailImg.setImageResource(iconForType(m.type));
+            detailName.setText(m.name);
+            detailLevel.setText("Nivel " + m.level);
+            chkDefeated.setChecked(m.defeated);
+        }
+    }
+
+    private int iconForType(String type) {
+        if (type == null) return android.R.drawable.ic_menu_help;
+        switch (type) {
+            case "slime":
+                return android.R.drawable.presence_online;
+            case "goblin":
+                return android.R.drawable.ic_menu_myplaces;
+            case "dragon":
+                return android.R.drawable.ic_menu_compass;
+            default:
+                return android.R.drawable.ic_menu_help;
+        }
     }
 }
