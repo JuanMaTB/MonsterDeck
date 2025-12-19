@@ -4,18 +4,18 @@
 
     <item
         android:id="@+id/action_add"
-        android:title="Añadir"
-        android:icon="@android:drawable/ic_input_add"
-        app:showAsAction="ifRoom" />
+        android:title="@string/menu_add"
+        android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_filter_defeated"
-        android:title="Ver solo derrotados"
+        android:title="@string/menu_filter_defeated"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_about"
-        android:title="Acerca de"
+        android:title="@string/menu_about"
         app:showAsAction="never" />
 
 </menu>

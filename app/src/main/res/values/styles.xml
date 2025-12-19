@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tema AppCompat: necesario para AppCompatActivity -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Por ahora vacío: lo importante es que herede de AppCompat -->
+    </style>
+
+</resources>

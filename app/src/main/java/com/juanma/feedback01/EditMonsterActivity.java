@@ -19,7 +19,7 @@ public class EditMonsterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Añadir / Editar");
+        setTitle(getString(R.string.add_edit_title));
         setContentView(R.layout.activity_edit);
 
         db = new DBHelper(this);
@@ -60,7 +60,7 @@ public class EditMonsterActivity extends AppCompatActivity {
             boolean defeated = chkDefeated.isChecked();
 
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(levelStr)) {
-                Toast.makeText(this, "Rellena nombre y nivel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.fill_name_level), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -68,19 +68,18 @@ public class EditMonsterActivity extends AppCompatActivity {
             try {
                 level = Integer.parseInt(levelStr);
             } catch (Exception e) {
-                Toast.makeText(this, "Nivel inválido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.invalid_level), Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Convertimos el texto del spinner a “clave”
             String typeKey = type.toLowerCase(); // slime/goblin/dragon
 
             if (monsterId == -1) {
                 db.addMonster(name, level, defeated, typeKey);
-                Toast.makeText(this, "Monstruo añadido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.monster_added), Toast.LENGTH_SHORT).show();
             } else {
                 db.updateMonster(monsterId, name, level, defeated, typeKey);
-                Toast.makeText(this, "Monstruo actualizado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.monster_updated), Toast.LENGTH_SHORT).show();
             }
 
             finish();
