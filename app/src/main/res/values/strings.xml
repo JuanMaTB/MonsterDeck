@@ -1,7 +1,21 @@
 <resources>
     <string name="app_name">Bestiario RPG</string>
 
-    <string name="monster_name_placeholder">Nombre del monstruo</string>
-    <string name="monster_level_placeholder">Nivel</string>
-    <string name="monster_defeated">Derrotado</string>
+    <string name="monster_image">Imagen del monstruo</string>
+    <string name="defeated">Derrotado</string>
+
+    <string name="add">Añadir</string>
+    <string name="filter_defeated">Ver derrotados</string>
+    <string name="about">Acerca de</string>
+
+    <string name="edit">Editar</string>
+    <string name="save">Guardar</string>
+    <string name="name">Nombre</string>
+    <string name="level">Nivel</string>
+
+    <string-array name="monster_types">
+        <item>slime</item>
+        <item>goblin</item>
+        <item>dragon</item>
+    </string-array>
 </resources>
