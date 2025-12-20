@@ -17,8 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/txtVersion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txtVersion"
@@ -27,7 +26,8 @@
         android:text="v1.0"
         android:textSize="14sp"
         android:alpha="0.75"
-        app:layout_constraintTop_toBottomOf="@id/imgSplash"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -38,9 +38,8 @@
         android:text="Toca para continuar"
         android:textSize="16sp"
         android:alpha="0.85"
-        app:layout_constraintTop_toBottomOf="@id/txtVersion"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
