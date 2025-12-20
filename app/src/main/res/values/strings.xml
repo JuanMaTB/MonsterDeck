@@ -1,32 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este archivo contiene todos los textos de la aplicacion
+aqui van los strings que se muestran en pantalla
+
+se relaciona con:
+- activities java: usan estos textos para titulos, botones y mensajes
+- layouts xml: usan estos strings como texto visible
+- menu_main.xml: usa estos textos para las opciones del menu
+
+nota:
+los textos no se ponen directamente en el codigo
+se ponen aqui para centralizarlos y facilitar cambios o traducciones
+-->
 <resources>
+
+    <!--
+    nombre de la aplicacion
+    se muestra en el launcher y en la barra superior
+    -->
     <string name="app_name">Bestiario RPG</string>
 
-    <!-- Detail -->
+    <!-- ---------------- DETAIL ---------------- -->
+
+    <!--
+    textos usados en la pantalla de detalle
+    -->
     <string name="monster_image">Imagen del monstruo</string>
     <string name="monster_name_placeholder">Nombre</string>
     <string name="monster_level_placeholder">Nivel</string>
     <string name="defeated">Derrotado</string>
     <string name="edit">Editar</string>
 
-    <!-- Edit -->
+    <!-- ---------------- EDIT ---------------- -->
+
+    <!--
+    textos usados en la pantalla de añadir / editar
+    -->
     <string name="add_edit_title">Añadir / Editar</string>
     <string name="name_hint">Nombre</string>
     <string name="level_hint">Nivel</string>
     <string name="type">Tipo</string>
     <string name="save">Guardar</string>
+
+    <!--
+    mensajes de validacion y feedback
+    -->
     <string name="fill_name_level">Rellena nombre y nivel</string>
     <string name="invalid_level">Nivel inválido</string>
     <string name="monster_added">Monstruo añadido</string>
     <string name="monster_updated">Monstruo actualizado</string>
 
-    <!-- Menu -->
+    <!-- ---------------- MENU ---------------- -->
+
+    <!--
+    textos del menu de opciones
+    -->
     <string name="menu_add">Añadir</string>
     <string name="menu_filter_defeated">Filtrar derrotados</string>
     <string name="menu_about">Acerca de</string>
-    <string name="about_title">Acerca de</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_delete">Eliminar</string>
 
-    <string name="about_message">Bestiario RPG\n\nProyecto de ejemplo (Feedback)\nJuanma</string>
+    <!--
+    textos del dialogo acerca de
+    -->
+    <string name="about_title">Acerca de</string>
+    <string name="about_message">
+        Bestiario RPG
+
+        Proyecto de Feedback
+
+        JuanMaTB
+    </string>
+
 </resources>

@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este archivo define el menu principal de la app
+es un menu comun que se reutiliza en varias pantallas
+
+se relaciona con:
+- mainactivity.java
+- detailactivity.java
+- editmonsteractivity.java
+
+nota:
+aunque el menu es el mismo, cada activity decide
+que opciones se muestran u ocultan segun el contexto
+-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Main: añadir nuevo monstruo -->
+    <!--
+    opcion para anadir un nuevo monstruo
+    se usa en la pantalla principal
+    -->
     <item
         android:id="@+id/action_add"
         android:title="@string/menu_add"
         android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="always" />
 
-    <!-- Detail: editar monstruo -->
+    <!--
+    opcion para editar el monstruo actual
+    se usa en la pantalla de detalle
+    -->
     <item
         android:id="@+id/action_edit"
         android:title="@string/menu_edit"
         android:icon="@android:drawable/ic_menu_edit"
         app:showAsAction="always" />
 
-    <!-- Detail: eliminar monstruo -->
+    <!--
+    opcion para eliminar el monstruo actual
+    se usa en la pantalla de detalle
+    -->
     <item
         android:id="@+id/action_delete"
         android:title="@string/menu_delete"
         android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="always" />
 
-    <!-- Main: filtro derrotados -->
+    <!--
+    opcion para filtrar solo los monstruos derrotados
+    se usa en la pantalla principal
+    -->
     <item
         android:id="@+id/action_filter_defeated"
         android:title="@string/menu_filter_defeated"
         app:showAsAction="never" />
 
-    <!-- Todas: acerca de -->
+    <!--
+    opcion acerca de
+    esta disponible en todas las pantallas
+    -->
     <item
         android:id="@+id/action_about"
         android:title="@string/menu_about"

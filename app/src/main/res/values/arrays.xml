@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este archivo contiene arrays de recursos
+aqui guardo listas de valores que se usan en la interfaz
+
+se relaciona con:
+- editmonsteractivity.java: usa este array para rellenar el spinner de tipos
+- activity_edit.xml: contiene el spinner que muestra estos valores
+
+nota:
+estos valores no van en el codigo java
+van aqui para separar datos de logica
+y facilitar cambios o traducciones en el futuro
+-->
 <resources>
+
+    <!--
+    lista de tipos de monstruo
+    se usa en el spinner de la pantalla de edicion
+
+    lo pongo aqui porque:
+    - asi no hardcodeo textos en el codigo
+    - puedo cambiar los textos sin tocar java
+    - puedo reutilizar recursos en android
+    -->
     <string-array name="monster_types">
         <item>Slime</item>
         <item>Goblin</item>
         <item>Dragon</item>
     </string-array>
+
 </resources>

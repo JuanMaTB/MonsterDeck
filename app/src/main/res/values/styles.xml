@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este archivo define los estilos y temas de la aplicacion
+aqui se decide como se ve la app en general
+
+se relaciona con:
+- androidmanifest.xml: ahi se indica que este es el tema de la app
+- todas las activities: heredan este tema automaticamente
+
+nota:
+aunque ahora el tema es simple, es obligatorio usar appcompat
+porque todas las pantallas heredan de appcompatactivity
+-->
 <resources>
 
-    <!-- Tema AppCompat: necesario para AppCompatActivity -->
+    <!--
+    tema principal de la app
+    hereda de theme.appcompat para evitar errores
+    y poder usar actionbar y componentes modernos
+    -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Por ahora vacío: lo importante es que herede de AppCompat -->
+        <!--
+        por ahora no personalizo colores ni estilos
+        lo importante es tener un tema compatible
+        -->
     </style>
 
 </resources>
