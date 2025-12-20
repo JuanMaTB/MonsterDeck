@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este layout corresponde a la pantalla de añadir y editar monstruos
+es un formulario sencillo para introducir o modificar los datos
+
+se relaciona con:
+- editmonsteractivity.java: controla la logica del formulario
+- monster: representa los datos que se editan
+- dbhelper: guarda los cambios en la bd
+
+nota:
+uso scrollview para evitar problemas en pantallas pequenas
+-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- contenedor vertical del formulario -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- campo para el nombre del monstruo -->
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
@@ -17,6 +31,7 @@
             android:hint="@string/name_hint"
             android:inputType="textPersonName" />
 
+        <!-- campo para el nivel (solo numeros) -->
         <EditText
             android:id="@+id/edtLevel"
             android:layout_width="match_parent"
@@ -26,6 +41,7 @@
             android:hint="@string/level_hint"
             android:inputType="number" />
 
+        <!-- selector de tipo (valores en values/arrays.xml) -->
         <Spinner
             android:id="@+id/spType"
             android:layout_width="match_parent"
@@ -33,6 +49,7 @@
             android:layout_marginTop="10dp"
             android:minHeight="48dp" />
 
+        <!-- checkbox para marcar derrotado -->
         <CheckBox
             android:id="@+id/chkDefeatedEdit"
             android:layout_width="wrap_content"
@@ -41,6 +58,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/defeated" />
 
+        <!-- boton guardar -->
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
@@ -50,89 +68,4 @@
             android:text="@string/save" />
 
     </LinearLayout>
-</ScrollView>
-    <?xml version="1.0" encoding="utf-8"?>
-    <!--
-    este layout corresponde a la pantalla de añadir y editar monstruos
-    es un formulario sencillo para introducir o modificar los datos
-
-    se relaciona con:
-    - editmonsteractivity.java: controla la logica del formulario
-    - monster: representa los datos que se editan
-    - dbhelper: guarda los cambios en la bd
-
-    nota:
-    uso scrollview para evitar problemas en pantallas pequenas
-    -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
-<!--
-contenedor vertical del formulario
--->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <!--
-    campo para el nombre del monstruo
-    -->
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="@string/name_hint"
-        android:inputType="textPersonName" />
-
-    <!--
-    campo para el nivel del monstruo
-    solo admite numeros
-    -->
-    <EditText
-        android:id="@+id/edtLevel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/level_hint"
-        android:inputType="number" />
-
-    <!--
-    spinner para seleccionar el tipo del monstruo
-    los valores vienen de strings.xml
-    -->
-    <Spinner
-        android:id="@+id/spType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:minHeight="48dp" />
-
-    <!--
-    checkbox para marcar si el monstruo esta derrotado
-    -->
-    <CheckBox
-        android:id="@+id/chkDefeatedEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/defeated" />
-
-    <!--
-    boton para guardar los datos
-    -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/save" />
-
-</LinearLayout>
 </ScrollView>
