@@ -22,7 +22,8 @@ public class MonsterAdapter extends ArrayAdapter<Monster> {
         Monster m = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_monster, parent, false);
+            convertView = LayoutInflater.from(getContext())
+                    .inflate(R.layout.row_monster, parent, false);
         }
 
         ImageView img = convertView.findViewById(R.id.rowImg);
@@ -30,11 +31,13 @@ public class MonsterAdapter extends ArrayAdapter<Monster> {
         TextView level = convertView.findViewById(R.id.rowLevel);
         CheckBox defeated = convertView.findViewById(R.id.rowDefeated);
 
+        // Imagen chibi según tipo
         img.setImageResource(iconForType(m.type));
+
         name.setText(m.name);
         level.setText("Nivel " + m.level);
 
-        // Ojo: en la lista NO queremos que el checkbox “robe” el click del row
+        // En la lista el checkbox es solo informativo
         defeated.setClickable(false);
         defeated.setFocusable(false);
         defeated.setChecked(m.defeated);
@@ -43,17 +46,19 @@ public class MonsterAdapter extends ArrayAdapter<Monster> {
     }
 
     private int iconForType(String type) {
-        if (type == null) return android.R.drawable.ic_menu_help;
+        if (type == null) {
+            return R.drawable.bestiario_rpg;
+        }
 
         switch (type) {
             case "slime":
-                return android.R.drawable.presence_online;
+                return R.drawable.slime;
             case "goblin":
-                return android.R.drawable.ic_menu_myplaces;
+                return R.drawable.goblin;
             case "dragon":
-                return android.R.drawable.ic_menu_compass;
+                return R.drawable.dragon;
             default:
-                return android.R.drawable.ic_menu_help;
+                return R.drawable.bestiario_rpg;
         }
     }
 }
