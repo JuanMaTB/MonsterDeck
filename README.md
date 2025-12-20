@@ -1,174 +1,176 @@
-# 🐉 Bestiario RPG – Android + SQLite
+# 🐲 Bestiario RPG
 
-Aplicación Android tipo **bestiario de un RPG**, desarrollada como entrega de un feedback/práctica de la asignatura.  
-El objetivo principal del proyecto es aplicar los conceptos vistos en clase de forma **clara, funcional y sin sobrecomplicar**, cumpliendo todos los requisitos mínimos solicitados.
+![Bestiario RPG](app/src/main/res/drawable/bestiario_rpg.png)
 
-La app está pensada para ejecutarse en dispositivos con **Android 7.x o superior**.
+Aplicacion Android desarrollada como feedback de la asignatura.  
+La idea es un **bestiario de monstruos RPG**, donde se pueden añadir, editar, ver y eliminar criaturas, guardando todo en una base de datos SQLite.
+
+El objetivo principal del proyecto ha sido **cumplir todos los requisitos del feedback**, sin complicar de mas la aplicacion, pero cuidando la estructura y el funcionamiento.
 
 ---
 
 ## 🎯 Objetivo del proyecto
 
-Desarrollar una aplicación Android completa que incluya:
+Desarrollar una aplicacion Android que:
 
-- Varias pantallas (Activities)
-- Uso de distintos controles visuales
-- Persistencia de datos con **SQLite**
-- Navegación mediante **menús / ActionBar**
-- Uso correcto de **diálogos**
-- Código claro y estructurado
-
-Todo ello aplicado a un caso práctico sencillo: un **bestiario de monstruos**.
+- Use varias Activities
+- Muestre informacion con ListView y adaptadores
+- Almacene datos en una base de datos SQLite
+- Permita altas, modificaciones, consultas y borrados
+- Incluya menus, dialogos y una pantalla “Acerca de”
+- Sea instalable directamente mediante una APK
 
 ---
 
-## 🧩 Funcionalidades principales
+## 📱 Funcionamiento general
 
-- 📋 **Listado de monstruos** en un `ListView`
-- ➕ **Añadir** nuevos monstruos
-- ✏️ **Editar** monstruos existentes
-- 🔍 **Ver detalle** de cada monstruo
-- ❌ **Eliminar** monstruos (con confirmación)
-- ☑️ Marcar monstruos como **derrotados**
-- 🔎 **Filtrar** el listado para mostrar solo los derrotados
-- 🖼️ Uso de **imágenes** asociadas al tipo de monstruo
-- ℹ️ Diálogo **“Acerca de”** accesible desde todas las pantallas
+La aplicacion sigue un flujo muy sencillo:
 
----
+1. **Pantalla de inicio (Splash)**
+    - Muestra la imagen del bestiario
+    - Muestra la version de la app
+    - Al tocar la pantalla se accede a la aplicacion
 
-## 🖥️ Pantallas (Activities)
+2. **Pantalla principal**
+    - Muestra la lista de monstruos en un `ListView`
+    - Cada fila tiene imagen, nombre, nivel y estado (derrotado)
+    - Desde el menu se puede:
+        - Añadir un nuevo monstruo
+        - Filtrar monstruos derrotados
+        - Ver el dialogo “Acerca de”
 
-La aplicación cuenta con **3 Activities**, tal y como se pide en el enunciado:
+3. **Pantalla de detalle**
+    - Muestra la informacion completa del monstruo
+    - Imagen chibi segun el tipo
+    - Opcion de editar o eliminar el monstruo
+    - Eliminacion con dialogo de confirmacion
 
-### 1️⃣ MainActivity
-Pantalla principal de la aplicación.
-
-- Muestra el listado de monstruos en un `ListView`
-- Permite:
-    - Añadir nuevos monstruos
-    - Filtrar por monstruos derrotados
-    - Eliminar un monstruo mediante pulsación larga
-- Incluye menú con acciones y diálogo **Acerca de**
-
-### 2️⃣ DetailActivity
-Pantalla de detalle de un monstruo concreto.
-
-- Muestra:
-    - Imagen del monstruo (`ImageView`)
-    - Nombre y nivel (`TextView`)
-    - Estado de derrotado (`CheckBox`)
-- Acciones disponibles desde el menú:
-    - Editar monstruo
-    - Eliminar monstruo (con confirmación)
-    - Acerca de
-
-### 3️⃣ EditMonsterActivity
-Pantalla para añadir o editar monstruos.
-
-- Permite introducir:
-    - Nombre
-    - Nivel
-    - Tipo
-    - Estado derrotado
-- Reutiliza la misma pantalla tanto para **alta** como para **modificación**
-- Incluye menú con acceso a **Acerca de**
+4. **Pantalla de añadir / editar**
+    - Formulario para introducir o modificar los datos
+    - Validaciones basicas de nombre y nivel
+    - Selector de tipo mediante Spinner
 
 ---
 
-## 🧱 Controles utilizados
+## 🧱 Estructura de la aplicacion
 
-Tal y como exige el feedback, se utilizan los siguientes controles:
+### Activities
 
-- `ListView` → listado principal
-- `TextView` → textos y datos
-- `ImageView` → imagen del monstruo
-- `Button` → acciones (guardar / editar)
-- `CheckBox` → estado derrotado
-- (`EditText` y `Spinner` como controles adicionales)
+- **SplashActivity**
+    - Pantalla de inicio
+    - Solo sirve para mostrar la imagen y pasar a la principal
 
----
+- **MainActivity**
+    - Pantalla principal con el ListView
+    - Gestiona el menu principal y el filtro
 
-## 🗄️ Base de datos (SQLite)
+- **DetailActivity**
+    - Pantalla de detalle del monstruo
+    - Permite editar y eliminar
 
-Se utiliza **SQLite** mediante `SQLiteOpenHelper`.
-
-### Tabla `monsters`
-Campos:
-- `_id` → clave primaria autoincremental
-- `name` → nombre del monstruo
-- `level` → nivel
-- `defeated` → 0 / 1
-- `type` → tipo del monstruo
-
-### Operaciones implementadas
-- Alta (`addMonster`)
-- Modificación (`updateMonster`)
-- Borrado (`deleteMonster`)
-- Consulta individual (`getMonster`)
-- Listado completo (`getAll`)
-
-La base de datos incluye **datos de ejemplo** al crearse para que la aplicación tenga contenido desde el primer arranque.
+- **EditMonsterActivity**
+    - Formulario para añadir o editar monstruos
 
 ---
 
-## 📂 Menú y ActionBar
+### Base de datos (SQLite)
 
-La aplicación utiliza un **menú común** que se adapta según la pantalla:
+La base de datos se gestiona con la clase:
+
+- **DBHelper**
+
+Aqui se define:
+- La tabla de monstruos
+- Los campos (id, nombre, nivel, derrotado, tipo)
+- Las operaciones CRUD:
+    - Crear
+    - Leer
+    - Actualizar
+    - Borrar
+
+Al arrancar por primera vez se insertan algunos datos de ejemplo para que la app no aparezca vacia.
+
+---
+
+### Modelo y adaptador
+
+- **Monster**
+    - Clase modelo que representa un monstruo
+    - Contiene los datos que vienen de la base de datos
+
+- **MonsterAdapter**
+    - Adaptador del ListView
+    - Se encarga de pintar cada fila usando `row_monster.xml`
+    - Asigna la imagen chibi segun el tipo del monstruo
+
+---
+
+## 🎨 Interfaz y recursos
+
+- **ListView** para mostrar la lista
+- **ImageView** para las imagenes chibi
+- **TextView** para nombre y nivel
+- **CheckBox** para indicar si esta derrotado
+- **Button** para acciones
+- **Spinner** para seleccionar el tipo de monstruo
+
+Las imagenes chibi se encuentran en `res/drawable` y se asignan dinamicamente segun el tipo del monstruo.
+
+---
+
+## 🧭 Menus y dialogos
+
+La aplicacion usa un menu comun que se adapta segun la pantalla:
 
 - En la pantalla principal:
     - Añadir
     - Filtrar
     - Acerca de
+
 - En el detalle:
     - Editar
     - Eliminar
     - Acerca de
-- En la edición:
-    - Acerca de
 
-De esta forma se cumple el requisito de **acciones accesibles desde la ActionBar** en cada Activity.
+- En editar:
+    - Solo “Acerca de”
 
----
-
-## 💬 Uso de diálogos
-
-Se utilizan diálogos (`AlertDialog`) cuando es necesario:
-
-- Confirmación antes de eliminar un monstruo
-- Diálogo **Acerca de** con información del proyecto
+Los dialogos se usan para:
+- Confirmar eliminaciones
+- Mostrar informacion “Acerca de”
 
 ---
 
-## ▶️ Cómo usar la aplicación
+## 📦 APK instalable
 
-1. Al abrir la app se muestra el listado de monstruos.
-2. Pulsa un monstruo para ver su detalle.
-3. Desde el detalle puedes:
-    - Editarlo
-    - Eliminarlo (con confirmación)
-4. Desde el menú principal puedes:
-    - Añadir un nuevo monstruo
-    - Filtrar los derrotados
-5. También puedes eliminar directamente desde la lista con una pulsación larga.
+Dentro del repositorio se incluye una version instalable de la aplicacion:
 
----
+📁 `apk/app-debug.apk`
 
-## 📦 APK y entrega
+### Pasos para instalar:
+1. Descargar la APK
+2. Activar la instalacion desde origenes desconocidos
+3. Abrir la APK en el dispositivo Android
 
-El proyecto incluye un **APK instalable** generado desde Android Studio para facilitar la prueba de la aplicación sin necesidad de compilar el código.
+No es necesario compilar el proyecto para probar la aplicacion.
 
 ---
 
-## 🚀 Posibles mejoras futuras
+## 🔮 Posibles mejoras
 
-- Uso de imágenes propias
-- Búsqueda por nombre
-- Validaciones más avanzadas
-- Mejoras visuales en layouts
-- Separar menús específicos por Activity
+Algunas mejoras que se podrian añadir en el futuro:
+
+- Ordenar monstruos por nivel o nombre
+- Buscar monstruos
+- Editar el estado derrotado directamente desde la lista
+- Añadir mas tipos de monstruos
+- Guardar imagen personalizada por monstruo
+- Soporte para multiples idiomas
 
 ---
 
 ## 👤 Autor
 
-JuanMaTB  
+Juanma  
+Proyecto desarrollado como feedback de la asignatura de Android.
+
