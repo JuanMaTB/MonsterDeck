@@ -9,7 +9,7 @@ El objetivo principal del proyecto ha sido **cumplir todos los requisitos del fe
 
 ---
 
-## 🎯 Objetivo del proyecto
+## Objetivo del proyecto
 
 Desarrollar una aplicacion Android que:
 
@@ -22,7 +22,7 @@ Desarrollar una aplicacion Android que:
 
 ---
 
-## 📱 Funcionamiento general
+## Funcionamiento general
 
 La aplicacion sigue un flujo muy sencillo:
 
@@ -52,7 +52,7 @@ La aplicacion sigue un flujo muy sencillo:
 
 ---
 
-## 🧱 Estructura de la aplicacion
+## Estructura de la aplicacion
 
 ### Activities
 
@@ -105,7 +105,7 @@ Al arrancar por primera vez se insertan algunos datos de ejemplo para que la app
 
 ---
 
-## 🎨 Interfaz y recursos
+## Interfaz y recursos
 
 - **ListView** para mostrar la lista
 - **ImageView** para las imagenes chibi
@@ -118,7 +118,7 @@ Las imagenes chibi se encuentran en `res/drawable` y se asignan dinamicamente se
 
 ---
 
-## 🧭 Menus y dialogos
+## Menus y dialogos
 
 La aplicacion usa un menu comun que se adapta segun la pantalla:
 
@@ -141,7 +141,7 @@ Los dialogos se usan para:
 
 ---
 
-## 📦 APK instalable
+## APK instalable
 
 Dentro del repositorio se incluye una version instalable de la aplicacion:
 
@@ -156,21 +156,19 @@ No es necesario compilar el proyecto para probar la aplicacion.
 
 ---
 
-## 🔮 Posibles mejoras
+## Posibles mejoras
 
 Algunas mejoras que se podrian añadir en el futuro:
 
 - Ordenar monstruos por nivel o nombre
-- Buscar monstruos
-- Editar el estado derrotado directamente desde la lista
+- Añadir musica
 - Añadir mas tipos de monstruos
-- Guardar imagen personalizada por monstruo
-- Soporte para multiples idiomas
+- Implementar sistema de combates
 
 ---
 
 ## 👤 Autor
 
 Juanma  
-Proyecto desarrollado como feedback de la asignatura de Android.
+Proyecto desarrollado como feedback de programacion dirigida a eventos.
 
