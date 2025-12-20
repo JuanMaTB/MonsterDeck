@@ -20,7 +20,7 @@ se ponen aqui para centralizarlos y facilitar cambios o traducciones
     -->
     <string name="app_name">Bestiario RPG</string>
 
-    <!-- ---------------- DETAIL ---------------- -->
+    <!--  DETAIL  -->
 
     <!--
     textos usados en la pantalla de detalle
@@ -31,7 +31,7 @@ se ponen aqui para centralizarlos y facilitar cambios o traducciones
     <string name="defeated">Derrotado</string>
     <string name="edit">Editar</string>
 
-    <!-- ---------------- EDIT ---------------- -->
+    <!--  EDIT  -->
 
     <!--
     textos usados en la pantalla de añadir / editar
@@ -50,7 +50,7 @@ se ponen aqui para centralizarlos y facilitar cambios o traducciones
     <string name="monster_added">Monstruo añadido</string>
     <string name="monster_updated">Monstruo actualizado</string>
 
-    <!-- ---------------- MENU ---------------- -->
+    <!-- MENU -->
 
     <!--
     textos del menu de opciones
