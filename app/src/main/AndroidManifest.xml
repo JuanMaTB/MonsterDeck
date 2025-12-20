@@ -4,7 +4,7 @@ este archivo es el manifiesto de android
 aqui declaro la app y las pantallas (activities) que existen
 tambien decido cual es la pantalla de inicio (la que tiene launcher)
 
-se relaciona con:
+se relaciona:
 - splashactivity: pantalla inicial tipo "toca para continuar"
 - mainactivity: pantalla principal con el listview
 - detailactivity: pantalla del detalle del monstruo
