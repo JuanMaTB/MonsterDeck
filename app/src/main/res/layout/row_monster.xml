@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este layout representa una fila individual del listview
+cada monstruo se pinta usando este diseño
+
+se relaciona con:
+- monsteradapter.java: infla este layout y rellena los datos
+- activity_main.xml: contiene el listview que usa estas filas
+- monster: aporta los datos que se muestran
+
+nota:
+separo este layout para reutilizarlo y mantener el codigo limpio
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp">
 
+    <!--
+    imagen del monstruo
+    se asigna dinamicamente segun el tipo
+    -->
     <ImageView
         android:id="@+id/rowImg"
         android:layout_width="48dp"
@@ -12,32 +28,47 @@
         android:contentDescription="@string/monster_image"
         android:layout_marginEnd="12dp" />
 
+    <!--
+    contenedor vertical para nombre y nivel
+    -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <!--
+        nombre del monstruo
+        -->
         <TextView
             android:id="@+id/rowName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
+        <!--
+        nivel del monstruo
+        -->
         <TextView
             android:id="@+id/rowLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nivel 1"/>
+            android:text="Nivel 1" />
     </LinearLayout>
 
+    <!--
+    checkbox informativo
+    aqui solo muestro si esta derrotado
+    no se puede interactuar desde la lista
+    -->
     <CheckBox
         android:id="@+id/rowDefeated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:minWidth="48dp"
-        android:text="@string/defeated"/>
+        android:text="@string/defeated" />
+
 </LinearLayout>

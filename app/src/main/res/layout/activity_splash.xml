@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este layout corresponde a la pantalla splash de la app
+es la primera pantalla que se muestra al arrancar
+
+se relaciona con:
+- splashactivity.java: gestiona el click y el salto a la pantalla principal
+- mainactivity.java: es la siguiente pantalla despues del splash
+
+nota:
+uso constraintlayout para centrar bien los elementos en cualquier tamano de pantalla
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +18,10 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
+    <!--
+    imagen principal del splash
+    aqui va el logo con el titulo ya integrado
+    -->
     <ImageView
         android:id="@+id/imgSplash"
         android:layout_width="0dp"
@@ -19,6 +34,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!--
+    texto con la version de la app
+    se rellena desde splashactivity
+    -->
     <TextView
         android:id="@+id/txtVersion"
         android:layout_width="wrap_content"
@@ -31,6 +50,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!--
+    texto informativo para el usuario
+    toda la pantalla es clickable
+    -->
     <TextView
         android:id="@+id/txtTap"
         android:layout_width="wrap_content"

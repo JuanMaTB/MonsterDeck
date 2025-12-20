@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este layout corresponde a la pantalla principal
+aqui solo se muestra la lista de monstruos
+
+se relaciona con:
+- mainactivity.java: controla la logica de la lista
+- monsteradapter: pinta cada fila del listview
+- row_monster.xml: layout de cada monstruo
+
+nota:
+mantengo el layout simple porque toda la logica esta en la activity
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="12dp">
 
+    <!--
+    listview principal
+    aqui se muestran todos los monstruos
+    -->
     <ListView
         android:id="@+id/listMonsters"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="8dp"/>
+        android:dividerHeight="8dp" />
+
 </LinearLayout>

@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este layout corresponde a la pantalla de detalle del monstruo
+aqui se muestra toda la informacion de un solo monstruo
+
+se relaciona con:
+- detailactivity.java: controla los datos que se muestran aqui
+- monster: de ahi salen los valores
+- dbhelper: proporciona los datos desde la bd
+
+nota:
+uso scrollview porque en moviles pequenos quiero evitar cortes
+-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
+    contenedor vertical de todos los elementos
+    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!--
+        imagen del monstruo
+        se cambia dinamicamente segun el tipo (slime, goblin, dragon)
+        -->
         <ImageView
             android:id="@+id/detailImg"
             android:layout_width="120dp"
@@ -17,6 +36,9 @@
             android:contentDescription="@string/monster_image"
             android:src="@android:drawable/sym_def_app_icon" />
 
+        <!--
+        nombre del monstruo
+        -->
         <TextView
             android:id="@+id/detailName"
             android:layout_width="match_parent"
@@ -26,6 +48,9 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+        <!--
+        nivel del monstruo
+        -->
         <TextView
             android:id="@+id/detailLevel"
             android:layout_width="match_parent"
@@ -34,6 +59,11 @@
             android:text="@string/monster_level_placeholder"
             android:textSize="16sp" />
 
+        <!--
+        checkbox informativo
+        aqui solo muestro si esta derrotado
+        no se puede modificar desde esta pantalla
+        -->
         <CheckBox
             android:id="@+id/chkDefeated"
             android:layout_width="wrap_content"
@@ -43,6 +73,9 @@
             android:layout_marginTop="10dp"
             android:text="@string/defeated" />
 
+        <!--
+        boton para ir a la pantalla de edicion
+        -->
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
