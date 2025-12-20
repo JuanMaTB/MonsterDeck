@@ -25,5 +25,8 @@
     <string name="menu_filter_defeated">Filtrar derrotados</string>
     <string name="menu_about">Acerca de</string>
     <string name="about_title">Acerca de</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_delete">Eliminar</string>
+
     <string name="about_message">Bestiario RPG\n\nProyecto de ejemplo (Feedback)\nJuanma</string>
 </resources>
