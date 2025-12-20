@@ -67,7 +67,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // vuelve a la pantalla anterior
+        finish();
         return true;
     }
 
@@ -81,14 +81,15 @@ public class DetailActivity extends AppCompatActivity {
         detailLevel.setText("Nivel " + m.level);
         chkDefeated.setChecked(m.defeated);
 
+        // Imágenes chibi propias (res/drawable)
         if ("slime".equals(m.type)) {
-            detailImg.setImageResource(android.R.drawable.presence_online);
+            detailImg.setImageResource(R.drawable.slime);
         } else if ("goblin".equals(m.type)) {
-            detailImg.setImageResource(android.R.drawable.presence_away);
+            detailImg.setImageResource(R.drawable.goblin);
         } else if ("dragon".equals(m.type)) {
-            detailImg.setImageResource(android.R.drawable.presence_busy);
+            detailImg.setImageResource(R.drawable.dragon);
         } else {
-            detailImg.setImageResource(android.R.drawable.sym_def_app_icon);
+            detailImg.setImageResource(R.drawable.bestiario_rpg);
         }
     }
 
