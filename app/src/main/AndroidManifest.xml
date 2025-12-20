@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+este archivo es el manifiesto de android
+aqui declaro la app y las pantallas (activities) que existen
+tambien decido cual es la pantalla de inicio (la que tiene launcher)
+
+se relaciona con:
+- splashactivity: pantalla inicial tipo "toca para continuar"
+- mainactivity: pantalla principal con el listview
+- detailactivity: pantalla del detalle del monstruo
+- editmonsteractivity: pantalla para crear o editar un monstruo
+
+nota:
+si una activity no esta declarada aqui, android no la puede abrir con intents
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--
+    application es la configuracion global de la app
+    el theme es importante porque yo uso appcompatactivity y necesito un tema compatible
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +27,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--
+        esta es la pantalla de arranque real
+        tiene intent-filter con main + launcher, por eso android entra aqui al abrir la app
+        -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -18,14 +40,27 @@
             </intent-filter>
         </activity>
 
+        <!--
+        pantalla principal
+        exported=false porque no quiero que otras apps me la puedan abrir desde fuera
+        yo la abro desde splashactivity con un intent
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
+        <!--
+        pantalla de detalle del monstruo
+        la abro desde la lista pasando el monsterId en el intent
+        -->
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
 
+        <!--
+        pantalla de alta / edicion
+        la abro desde el menu (para crear) o desde detalle (para editar)
+        -->
         <activity
             android:name=".EditMonsterActivity"
             android:exported="false" />
